@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">FinderProject</string>
+
+<!--  Owner-->
+    <string name="enter_name"> Please Enter Name </string>
+    <string name="enter_address"> Please Enter Address </string>
+    <string name="enter_phone"> Please Enter Phone</string>
+    <string name="enter_email"> Please Enter Email</string>
+    <string name="owner_field">Owner Input Field</string>
+</resources>
