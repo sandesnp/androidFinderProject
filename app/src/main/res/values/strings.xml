@@ -1,10 +1,18 @@
 <resources>
     <string name="app_name">FinderProject</string>
 
-<!--  Owner-->
-    <string name="enter_name"> Please Enter Name </string>
-    <string name="enter_address"> Please Enter Address </string>
-    <string name="enter_phone"> Please Enter Phone</string>
-    <string name="enter_email"> Please Enter Email</string>
+    <!--  Owner-->
+    <string name="enter_name">Enter Name </string>
+    <string name="enter_address">Enter Address </string>
+    <string name="enter_phone">Enter Phone</string>
+    <string name="enter_email">Enter Email</string>
     <string name="owner_field">Owner Input Field</string>
+
+    <!--    Shop Register-->
+    <string name="enter_shop_name">Enter Shop Name</string>
+    <string name="enter_shop_logo">Click on Image to select Shop logo</string>
+    <string name="enter_shop_location">Enter Shop Location</string>
+    <string name="enter_shop_google_location"><u>Designate Shop Location on Map</u></string>
+    <string name="reg_shop_button">I am Done</string>
+
 </resources>

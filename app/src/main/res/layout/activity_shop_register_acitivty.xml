@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".ShopRegisterAcitivty">
+
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:padding="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_launcher_foreground"
+         />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:shadowColor="#131111"
+        android:shadowDx="5"
+        android:shadowDy="5"
+        android:shadowRadius="20"
+        android:text="@string/enter_shop_logo"
+        android:textSize="12sp" />
+
+    <EditText
+        android:id="@+id/tvrgshopname"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:autofillHints="@string/enter_shop_name"
+        android:gravity="center"
+        android:hint="@string/enter_shop_name"
+        android:inputType="text"
+        android:shadowColor="#131111"
+        android:shadowDx="10"
+        android:shadowDy="10"
+        android:shadowRadius="20" />
+
+    <EditText
+        android:id="@+id/tvrgshoplocation"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:autofillHints="@string/enter_shop_location"
+        android:gravity="center"
+        android:hint="@string/enter_shop_location"
+        android:inputType="text"
+        android:shadowColor="#131111"
+        android:shadowDx="5"
+        android:shadowDy="5"
+        android:shadowRadius="20" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:shadowColor="#131111"
+        android:shadowDx="5"
+        android:shadowDy="5"
+        android:shadowRadius="20"
+        android:text="@string/enter_shop_google_location"
+        android:textSize="15sp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/btnshop"
+        android:elevation="15dp"
+        android:shadowColor="#000000"
+        android:text="@string/reg_shop_button"
+        android:typeface="serif" />
+
+
+</LinearLayout>
