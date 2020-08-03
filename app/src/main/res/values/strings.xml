@@ -14,5 +14,6 @@
     <string name="enter_shop_location">Enter Shop Location</string>
     <string name="enter_shop_google_location"><u>Designate Shop Location on Map</u></string>
     <string name="reg_shop_button">I am Done</string>
+    <string name="title_activity_select_location">Map</string>
 
 </resources>

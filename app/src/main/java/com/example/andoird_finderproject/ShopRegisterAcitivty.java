@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.andoird_finderproject.controllers.controllerShop;
@@ -23,10 +24,12 @@ import com.example.andoird_finderproject.models.shopcoordinate;
 public class ShopRegisterAcitivty extends AppCompatActivity implements View.OnClickListener {
 
     private EditText etShopName, etShopLocation;
+    private TextView tvCoordinate;
     private Button etShopButton;
     private ImageView etShopLogo;
     private Boolean checkImage = false;
     private String imagePath, imageName = "default";
+    private String coordinateLatitude, coordinateLongitude;
     private String ownerID;
 
     @Override
@@ -39,9 +42,11 @@ public class ShopRegisterAcitivty extends AppCompatActivity implements View.OnCl
 
         etShopLocation = findViewById(R.id.etrgshoplocation);
         etShopName = findViewById(R.id.etrgshopname);
+        tvCoordinate = findViewById(R.id.tvrgcoordinate);
         etShopButton = findViewById(R.id.btnrgshopregister);
         etShopLogo = findViewById(R.id.imgrgshoplogo);
 
+        tvCoordinate.setOnClickListener(this);
         etShopButton.setOnClickListener(this);
         etShopLogo.setOnClickListener(this);
 
@@ -62,6 +67,10 @@ public class ShopRegisterAcitivty extends AppCompatActivity implements View.OnCl
             Uri uri = data.getData();
             etShopLogo.setImageURI(uri);
             imagePath = getImagePath(uri);
+        }
+        if(resultCode==22){
+            coordinateLongitude=Double.toString(data.getDoubleExtra("longitude",0));
+            coordinateLatitude=Double.toString(data.getDoubleExtra("latitude",0));
         }
 
     }
@@ -86,13 +95,12 @@ public class ShopRegisterAcitivty extends AppCompatActivity implements View.OnCl
         shop.setShoplocation(etShopLocation.getText().toString());
         shop.setShoplogo(imageName);
         shop.setShopownerid("5f22cd86f6c57c541026e83b");
-        shop.setShopcoordinate(new shopcoordinate("123", "321", "I am marker."));
+        shop.setShopcoordinate(new shopcoordinate(coordinateLatitude, coordinateLongitude, etShopName.getText().toString()));
 
         if (new controllerShop(shop).post()) {
             Toast.makeText(this, "Successfully Registered Shop.", Toast.LENGTH_SHORT).show();
         }
     }
-
 
     @Override
     public void onClick(View view) {
@@ -102,6 +110,14 @@ public class ShopRegisterAcitivty extends AppCompatActivity implements View.OnCl
                 break;
             case R.id.imgrgshoplogo:
                 SelectImage();
+                break;
+            case R.id.tvrgcoordinate:
+                String ShopName = etShopName.getText().toString();
+                if (!ShopName.equals("")) {
+                    Intent intent = new Intent(this, SelectLocationActivity.class);
+                    intent.putExtra("shopName", etShopName.getText().toString());
+                    startActivityForResult(intent, 22);
+                }
                 break;
         }
     }
@@ -119,9 +135,15 @@ public class ShopRegisterAcitivty extends AppCompatActivity implements View.OnCl
             return;
         }
 
+
         if (checkImage) {
             imageName = new controllerShop(new shop()).postImage(imagePath);
         }
-        Register();
+        if(coordinateLatitude !=null && coordinateLongitude!=null){
+            Register();
+        }
+        else{
+            Toast.makeText(this, "Please select Map Coordinates.", Toast.LENGTH_SHORT).show();
+        }
     }
 }
