@@ -3,6 +3,7 @@ package com.example.andoird_finderproject;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -16,15 +17,19 @@ public class ItemAddAcitivty extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_add_acitivty);
 
-        itemName= findViewById(R.id.etitemaddname);
-        itemDescription= findViewById(R.id.etitemadddescription);
-        itemType= findViewById(R.id.etitemaddtype);
-        itemBrand= findViewById(R.id.etitemaddbrand);
-        btnAdd= findViewById(R.id.btnitemadd);
+        itemName = findViewById(R.id.etitemaddname);
+        itemDescription = findViewById(R.id.etitemadddescription);
+        itemType = findViewById(R.id.etitemaddtype);
+        itemBrand = findViewById(R.id.etitemaddbrand);
+        btnAdd = findViewById(R.id.btnitemadd);
 
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //need to send ShopID and item object to requestItem.
 
-
-
+            }
+        });
 
     }
 }

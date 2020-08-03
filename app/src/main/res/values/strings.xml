@@ -3,9 +3,10 @@
 
     <!--  User-->
     <string name="enter_name">Enter Name </string>
-    <string name="enter_address">Enter Address </string>
+    <string name="enter_address">Enter Home Address </string>
     <string name="enter_phone">Enter Phone</string>
     <string name="enter_email">Enter Email</string>
+    <string name="enter_password">Enter Password</string>
     <string name="owner_field">User Input Field</string>
 
     <!--    Shop Register-->

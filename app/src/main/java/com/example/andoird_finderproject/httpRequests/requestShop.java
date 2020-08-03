@@ -47,7 +47,7 @@ public class requestShop extends restfulRequest {
     public boolean post() {
 
         shopAPI shopAPI= global.getInstance().create(shopAPI.class);
-        Call<shop> shopCall= shopAPI.shopRegister(shop);
+        Call<shop> shopCall= shopAPI.shopRegister(global.token, shop);
 
         global.StrictMode();
         try {

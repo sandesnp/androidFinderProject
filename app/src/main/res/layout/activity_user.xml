@@ -65,11 +65,23 @@
         android:textColor="#ffffff"
         android:textColorHint="#ffffff" />
 
+    <EditText
+        android:id="@+id/etuserpassword"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:autofillHints="Please type email"
+        android:gravity="center"
+        android:hint="@string/enter_password"
+        android:inputType="textPassword"
+        android:textColor="#ffffff"
+        android:textColorHint="#ffffff" />
+
+
     <Button
         android:id="@+id/btnuserregister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Submit"
-        />
+        android:text="@string/reg_shop_button" />
 
 </LinearLayout>

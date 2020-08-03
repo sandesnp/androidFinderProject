@@ -2,7 +2,10 @@ package com.example.andoird_finderproject.models;
 
 public class user {
 
-    private String userfullname, useraddress, userphonenumber, useremail;
+    private String userfullname, useraddress, userphonenumber, useremail, password;
+
+
+
 
     public String getUserfullname() {
         return userfullname;
@@ -34,5 +37,13 @@ public class user {
 
     public void setUseremail(String useremail) {
         this.useremail = useremail;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
