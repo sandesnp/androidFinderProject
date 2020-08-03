@@ -1,6 +1,6 @@
 package com.example.andoird_finderproject.InterfaceAPI;
 
-import com.example.andoird_finderproject.models.owner;
+import com.example.andoird_finderproject.models.item;
 import com.example.andoird_finderproject.models.shop;
 import com.example.andoird_finderproject.response.responseImage;
 
@@ -19,5 +19,8 @@ public interface shopAPI {
 
     @POST("shop")
     Call<shop> shopRegister(@Body shop shop);
+
+    @POST("shop/{id}")
+    Call<shop> itemRegister(@Body item item);
 
 }

@@ -1,9 +1,12 @@
 package com.example.andoird_finderproject.models;
 
+import java.util.ArrayList;
+
 public class shop {
 
 private String shopownerid, shopname,shoplogo, shoplocation;
 private shopcoordinate shopcoordinate;
+private ArrayList<item> shopitems;
 
     public String getShopownerid() {
         return shopownerid;
@@ -44,5 +47,10 @@ private shopcoordinate shopcoordinate;
     public void setShopcoordinate(com.example.andoird_finderproject.models.shopcoordinate shopcoordinate) {
         this.shopcoordinate = shopcoordinate;
     }
+
+    public ArrayList<item> getShopitems() {
+        return shopitems;
+    }
+
 }
 

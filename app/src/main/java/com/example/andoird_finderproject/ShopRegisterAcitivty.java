@@ -17,7 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.andoird_finderproject.controllers.controllerShop;
+import com.example.andoird_finderproject.httpRequests.requestShop;
 import com.example.andoird_finderproject.models.shop;
 import com.example.andoird_finderproject.models.shopcoordinate;
 
@@ -97,7 +97,7 @@ public class ShopRegisterAcitivty extends AppCompatActivity implements View.OnCl
         shop.setShopownerid("5f22cd86f6c57c541026e83b");
         shop.setShopcoordinate(new shopcoordinate(coordinateLatitude, coordinateLongitude, etShopName.getText().toString()));
 
-        if (new controllerShop(shop).post()) {
+        if (new requestShop(shop).post()) {
             Toast.makeText(this, "Successfully Registered Shop.", Toast.LENGTH_SHORT).show();
         }
     }
@@ -137,7 +137,7 @@ public class ShopRegisterAcitivty extends AppCompatActivity implements View.OnCl
 
 
         if (checkImage) {
-            imageName = new controllerShop(new shop()).postImage(imagePath);
+            imageName = new requestShop(new shop()).postImage(imagePath);
         }
         if(coordinateLatitude !=null && coordinateLongitude!=null){
             Register();

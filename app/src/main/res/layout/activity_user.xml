@@ -7,7 +7,7 @@
     android:background="@drawable/red_background_clipart"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".OwnerActivity">
+    tools:context=".UserActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -18,7 +18,7 @@
         android:textSize="30sp" />
 
     <EditText
-        android:id="@+id/etownername"
+        android:id="@+id/etusername"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -30,7 +30,7 @@
         android:textColorHint="#ffffff" />
 
     <EditText
-        android:id="@+id/etowneraddress"
+        android:id="@+id/etuseraddress"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -42,7 +42,7 @@
         android:textColorHint="#ffffff" />
 
     <EditText
-        android:id="@+id/etownerphonenumber"
+        android:id="@+id/etuserphonenumber"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -54,7 +54,7 @@
         android:textColorHint="#ffffff" />
 
     <EditText
-        android:id="@+id/etowneremail"
+        android:id="@+id/etuseremail"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -66,7 +66,7 @@
         android:textColorHint="#ffffff" />
 
     <Button
-        android:id="@+id/btnownerregister"
+        android:id="@+id/btnuserregister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Submit"

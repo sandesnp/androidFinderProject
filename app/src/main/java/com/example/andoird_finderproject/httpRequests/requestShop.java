@@ -1,4 +1,4 @@
-package com.example.andoird_finderproject.controllers;
+package com.example.andoird_finderproject.httpRequests;
 
 import com.example.andoird_finderproject.InterfaceAPI.shopAPI;
 import com.example.andoird_finderproject.global.global;
@@ -7,7 +7,6 @@ import com.example.andoird_finderproject.parentClass.restfulRequest;
 import com.example.andoird_finderproject.response.responseImage;
 
 import java.io.File;
-import java.lang.invoke.MutableCallSite;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -15,11 +14,11 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class controllerShop extends restfulRequest {
+public class requestShop extends restfulRequest {
 
     private shop shop;
 
-    public controllerShop(shop shop) {
+    public requestShop(shop shop) {
         this.shop = shop;
     }
 
