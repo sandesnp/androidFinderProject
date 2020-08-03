@@ -5,7 +5,6 @@ public class shop {
 private String shopownerid, shopname,shoplogo, shoplocation;
 private shopcoordinate shopcoordinate;
 
-
     public String getShopownerid() {
         return shopownerid;
     }
@@ -38,12 +37,12 @@ private shopcoordinate shopcoordinate;
         this.shoplocation = shoplocation;
     }
 
-    public com.example.andoird_finderproject.models.shopcoordinate getLatilongi() {
+    public com.example.andoird_finderproject.models.shopcoordinate getShopcoordinate() {
         return shopcoordinate;
     }
 
-    public void setLatilongi(com.example.andoird_finderproject.models.shopcoordinate latilongi) {
-        this.shopcoordinate = latilongi;
+    public void setShopcoordinate(com.example.andoird_finderproject.models.shopcoordinate shopcoordinate) {
+        this.shopcoordinate = shopcoordinate;
     }
 }
 
