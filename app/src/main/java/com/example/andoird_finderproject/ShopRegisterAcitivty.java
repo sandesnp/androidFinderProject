@@ -30,7 +30,6 @@ public class ShopRegisterAcitivty extends AppCompatActivity implements View.OnCl
     private Boolean checkImage = false;
     private String imagePath, imageName = "default";
     private String coordinateLatitude, coordinateLongitude;
-    private String ownerID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +93,6 @@ public class ShopRegisterAcitivty extends AppCompatActivity implements View.OnCl
         shop.setShopname(etShopName.getText().toString());
         shop.setShoplocation(etShopLocation.getText().toString());
         shop.setShoplogo(imageName);
-        shop.setShopownerid("5f22cd86f6c57c541026e83b");
         shop.setShopcoordinate(new shopcoordinate(coordinateLatitude, coordinateLongitude, etShopName.getText().toString()));
 
         if (new requestShop(shop).post()) {

@@ -8,13 +8,6 @@ private String shopownerid, shopname,shoplogo, shoplocation;
 private shopcoordinate shopcoordinate;
 private ArrayList<item> shopitems;
 
-    public String getShopownerid() {
-        return shopownerid;
-    }
-
-    public void setShopownerid(String shopownerid) {
-        this.shopownerid = shopownerid;
-    }
 
     public String getShopname() {
         return shopname;

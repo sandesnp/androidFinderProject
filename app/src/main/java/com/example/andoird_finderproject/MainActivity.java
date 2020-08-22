@@ -1,25 +1,71 @@
 package com.example.andoird_finderproject;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+
+import com.example.andoird_finderproject.fragments.Fragment_Home;
+import com.example.andoird_finderproject.fragments.Fragment_Popular;
+import com.example.andoird_finderproject.fragments.Fragment_Profile;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button button = findViewById(R.id.demoCreateShop);
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, ShopRegisterAcitivty.class));
+        BottomNavigationView navigationView = findViewById(R.id.navigation);
+        navigationView.setOnNavigationItemSelectedListener(this);
+
+        loadFragment(new Fragment_Home(), 1);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Fragment fragment;
+        switch (item.getItemId()) {
+            case R.id.navigation_home:
+                fragment = new Fragment_Home();
+                loadFragment(fragment, 1);
+                break;
+            case R.id.navigation_popular:
+                fragment = new Fragment_Popular();
+                loadFragment(fragment, 2);
+                break;
+            case R.id.navigation_profile:
+                fragment = new Fragment_Profile();
+                loadFragment(fragment, 3);
+                break;
+        }
+        return true;
+    }
+
+    private int position = 0;
+
+    private void loadFragment(Fragment fragment, int position) {
+
+        while (this.position != position) {
+            // load fragment
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, fragment);
+            if (this.position < position) {
+                transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_from_right);
+            } else {
+                transaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_from_left);
             }
-        });
+            this.position = position;
+            transaction.addToBackStack(null);
+            transaction.detach(fragment);
+            transaction.attach(fragment);
+            transaction.commit();
+        }
+
     }
 }
