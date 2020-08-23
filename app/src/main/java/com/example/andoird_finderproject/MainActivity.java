@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import com.example.andoird_finderproject.fragments.Fragment_Home;
 import com.example.andoird_finderproject.fragments.Fragment_Popular;
 import com.example.andoird_finderproject.fragments.Fragment_Profile;
+import com.example.andoird_finderproject.global.global;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        global.StrictMode();
 
         BottomNavigationView navigationView = findViewById(R.id.navigation);
         navigationView.setOnNavigationItemSelectedListener(this);

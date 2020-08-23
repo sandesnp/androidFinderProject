@@ -24,4 +24,8 @@ public class restfulRequest {
     public String postImage(String imagePath) {
         return "";
     }
+
+    public boolean fetchBy(String parameter) {
+        return false;
+    }
 }
