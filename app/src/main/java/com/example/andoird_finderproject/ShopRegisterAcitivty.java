@@ -26,7 +26,7 @@ public class ShopRegisterAcitivty extends AppCompatActivity implements View.OnCl
     private EditText etShopName, etShopLocation;
     private TextView tvCoordinate;
     private Button etShopButton;
-    private ImageView etShopLogo;
+    private ImageView ivShopLogo;
     private Boolean checkImage = false;
     private String imagePath, imageName = "default";
     private String coordinateLatitude, coordinateLongitude;
@@ -43,11 +43,11 @@ public class ShopRegisterAcitivty extends AppCompatActivity implements View.OnCl
         etShopName = findViewById(R.id.etrgshopname);
         tvCoordinate = findViewById(R.id.tvrgcoordinate);
         etShopButton = findViewById(R.id.btnrgshopregister);
-        etShopLogo = findViewById(R.id.imgrgshoplogo);
+        ivShopLogo = findViewById(R.id.imgrgshoplogo);
 
         tvCoordinate.setOnClickListener(this);
         etShopButton.setOnClickListener(this);
-        etShopLogo.setOnClickListener(this);
+        ivShopLogo.setOnClickListener(this);
 
     }
 
@@ -64,12 +64,12 @@ public class ShopRegisterAcitivty extends AppCompatActivity implements View.OnCl
         if (resultCode == RESULT_OK && data != null) {
             checkImage = true;
             Uri uri = data.getData();
-            etShopLogo.setImageURI(uri);
+            ivShopLogo.setImageURI(uri);
             imagePath = getImagePath(uri);
         }
-        if(resultCode==22){
-            coordinateLongitude=Double.toString(data.getDoubleExtra("longitude",0));
-            coordinateLatitude=Double.toString(data.getDoubleExtra("latitude",0));
+        if (resultCode == 22) {
+            coordinateLongitude = Double.toString(data.getDoubleExtra("longitude", 0));
+            coordinateLatitude = Double.toString(data.getDoubleExtra("latitude", 0));
         }
 
     }
@@ -97,6 +97,7 @@ public class ShopRegisterAcitivty extends AppCompatActivity implements View.OnCl
 
         if (new requestShop(shop).post()) {
             Toast.makeText(this, "Successfully Registered Shop.", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, MainActivity.class));
         }
     }
 
@@ -137,10 +138,9 @@ public class ShopRegisterAcitivty extends AppCompatActivity implements View.OnCl
         if (checkImage) {
             imageName = new requestShop(new shop()).postImage(imagePath);
         }
-        if(coordinateLatitude !=null && coordinateLongitude!=null){
+        if (coordinateLatitude != null && coordinateLongitude != null) {
             Register();
-        }
-        else{
+        } else {
             Toast.makeText(this, "Please select Map Coordinates.", Toast.LENGTH_SHORT).show();
         }
     }

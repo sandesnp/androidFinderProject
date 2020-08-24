@@ -7,9 +7,20 @@
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in_button"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
+
+    <Button
+        android:id="@+id/btnRegisterShop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/sign_out_button"
+        android:layout_centerHorizontal="true"
+        android:padding="0sp"
+        android:text="Register a Shop"
+        android:textSize="15sp"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/sign_out_button"
@@ -42,6 +53,5 @@
         android:text="default01"
         android:textSize="25sp"
         android:visibility="gone" />
-
 
 </RelativeLayout>

@@ -19,4 +19,7 @@ public interface userAPI {
     @GET("user/{email}")
     Call<responseUser> emailExist(@Path("email") String email);
 
+    @POST("user/login")
+    Call<responseUser> userLogin(@Body user user);
+
 }

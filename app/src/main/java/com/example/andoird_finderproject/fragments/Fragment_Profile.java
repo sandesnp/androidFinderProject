@@ -1,5 +1,8 @@
 package com.example.andoird_finderproject.fragments;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -11,13 +14,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.andoird_finderproject.R;
+import com.example.andoird_finderproject.ShopRegisterAcitivty;
 import com.example.andoird_finderproject.fragments.Inner_Fragment.fragmentUserCreate;
 import com.example.andoird_finderproject.global.global;
 import com.example.andoird_finderproject.httpRequests.requestUser;
+import com.example.andoird_finderproject.models.user;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -33,7 +39,8 @@ public class Fragment_Profile extends Fragment implements View.OnClickListener {
     GoogleSignInClient mGoogleSignInClient;
     private SignInButton signInButton;
     private TextView tvFullName, tvEmail;
-    private Button btnSignOut;
+    private Button btnSignOut, btnRegisterShop;
+    private EditText etEmail, etPassword;
     private int RC_SIGN_IN = 0;
 
     @Override
@@ -42,11 +49,13 @@ public class Fragment_Profile extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment__profile, container, false);
         signInButton = view.findViewById(R.id.sign_in_button);
-        signInButton.setOnClickListener(this);
         tvFullName = view.findViewById(R.id.tvFullName);
         tvEmail = view.findViewById(R.id.tvEmail);
         btnSignOut = view.findViewById(R.id.sign_out_button);
+        btnRegisterShop = view.findViewById(R.id.btnRegisterShop);
         btnSignOut.setOnClickListener(this);
+        signInButton.setOnClickListener(this);
+        btnRegisterShop.setOnClickListener(this);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestProfile()
@@ -73,6 +82,9 @@ public class Fragment_Profile extends Fragment implements View.OnClickListener {
                             }
                         });
                 break;
+            case R.id.btnRegisterShop:
+                startActivity(new Intent(getActivity(), ShopRegisterAcitivty.class));
+                break;
         }
     }
 
@@ -87,6 +99,7 @@ public class Fragment_Profile extends Fragment implements View.OnClickListener {
 
     //Step7
     public void updateUI(GoogleSignInAccount account) {
+
         //if the account is not null means user is currently logged in.
         if (account != null) {
             //redirecting to register google email if not registered
@@ -99,14 +112,17 @@ public class Fragment_Profile extends Fragment implements View.OnClickListener {
             tvFullName.setVisibility(View.VISIBLE);
             tvEmail.setVisibility(View.VISIBLE);
             btnSignOut.setVisibility(View.VISIBLE);
+            btnRegisterShop.setVisibility(View.VISIBLE);
             tvFullName.setText(account.getDisplayName());
             tvEmail.setText(account.getEmail());
 
-        } else {
+        }
+        else {
             signInButton.setVisibility(View.VISIBLE);
             tvFullName.setVisibility(View.GONE);
             tvEmail.setVisibility(View.GONE);
             btnSignOut.setVisibility(View.GONE);
+            btnRegisterShop.setVisibility(View.GONE);
         }
     }
 
@@ -142,13 +158,4 @@ public class Fragment_Profile extends Fragment implements View.OnClickListener {
             updateUI(null);
         }
     }
-
-    @Override
-    public void onDetach() {
-        //when the user presses back or the changes to new fragment
-
-        super.onDetach();
-
-    }
-
 }

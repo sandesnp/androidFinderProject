@@ -40,9 +40,11 @@ public class requestUser extends restfulRequest {
         Call<responseUser> userCall = userAPI.emailExist(email);
         try {
             Response<responseUser> userResponse = userCall.execute();
-            if (userResponse.isSuccessful()) {
-                return userResponse.body() != null; //returns true
+            if (userResponse.isSuccessful() && !userResponse.body().getToken().equals("")) {
+                global.token+=userResponse.body().getToken();
+                return true;
             }
+            return false;
         } catch (Exception e) {
             e.printStackTrace();
         }

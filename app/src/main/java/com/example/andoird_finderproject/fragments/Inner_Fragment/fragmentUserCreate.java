@@ -83,8 +83,10 @@ public class fragmentUserCreate extends Fragment {
 
         if (new requestUser(user).post()) {
             //Posting User here
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Fragment_Profile())
-                    .commit();
+            getActivity().getSupportFragmentManager().popBackStack();
+
+//                    .beginTransaction().replace(R.id.fragment_container, new Fragment_Profile())
+//                    .commit();
             Toast.makeText(getActivity(), "Successfully Registered", Toast.LENGTH_SHORT).show();
         }
     }
