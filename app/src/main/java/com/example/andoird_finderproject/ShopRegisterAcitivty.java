@@ -17,14 +17,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.andoird_finderproject.InterfaceAPI.shopAPI;
+import com.example.andoird_finderproject.global.global;
 import com.example.andoird_finderproject.httpRequests.requestShop;
+import com.example.andoird_finderproject.models.location_address;
 import com.example.andoird_finderproject.models.shop;
 import com.example.andoird_finderproject.models.shopcoordinate;
 
+import org.json.JSONObject;
+
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class ShopRegisterAcitivty extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText etShopName, etShopLocation;
-    private TextView tvCoordinate;
+    private EditText etShopName;
+    private TextView tvCoordinate, tvShopLocation;
     private Button etShopButton;
     private ImageView ivShopLogo;
     private Boolean checkImage = false;
@@ -39,7 +49,7 @@ public class ShopRegisterAcitivty extends AppCompatActivity implements View.OnCl
 //        Bundle bundle = getIntent().getExtras();
 //        ownerID = bundle.getString("ownerID");  //passed from other activity
 
-        etShopLocation = findViewById(R.id.etrgshoplocation);
+        tvShopLocation = findViewById(R.id.etrgshoplocation);
         etShopName = findViewById(R.id.etrgshopname);
         tvCoordinate = findViewById(R.id.tvrgcoordinate);
         etShopButton = findViewById(R.id.btnrgshopregister);
@@ -70,10 +80,36 @@ public class ShopRegisterAcitivty extends AppCompatActivity implements View.OnCl
         if (resultCode == 22) {
             coordinateLongitude = Double.toString(data.getDoubleExtra("longitude", 0));
             coordinateLatitude = Double.toString(data.getDoubleExtra("latitude", 0));
+
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl("https://us1.locationiq.com/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+
+            shopAPI shopAPI = retrofit.create(shopAPI.class);
+            Call<location_address> shopCall = shopAPI.getAddress(coordinateLatitude, coordinateLongitude);
+            try {
+                Response<location_address> shopResponse = shopCall.execute();
+                if (shopResponse.isSuccessful()) {
+                    String village = "";
+                    if (shopResponse.body().getAddress().getVillage() != null) {
+                        village = shopResponse.body().getAddress().getVillage() + ", "
+                                + shopResponse.body().getAddress().getCounty();
+                    } else if (shopResponse.body().getAddress().getSuburb() != null) {
+                        village = shopResponse.body().getAddress().getSuburb() + ", "
+                                + shopResponse.body().getAddress().getCounty();
+                    } else {
+                        village = shopResponse.body().getAddress().getCounty() + ", "
+                                + shopResponse.body().getAddress().getCountry();
+                    }
+                    tvShopLocation.setText(village);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-
     }
-
 
     private String getImagePath(Uri uri) {
         String[] projection = {MediaStore.Images.Media.DATA};
@@ -91,7 +127,7 @@ public class ShopRegisterAcitivty extends AppCompatActivity implements View.OnCl
 
         shop shop = new shop();
         shop.setShopname(etShopName.getText().toString());
-        shop.setShoplocation(etShopLocation.getText().toString());
+        shop.setShoplocation(tvShopLocation.getText().toString());
         shop.setShoplogo(imageName);
         shop.setShopcoordinate(new shopcoordinate(coordinateLatitude, coordinateLongitude, etShopName.getText().toString()));
 
@@ -125,12 +161,6 @@ public class ShopRegisterAcitivty extends AppCompatActivity implements View.OnCl
         if (TextUtils.isEmpty(etShopName.getText())) {
             etShopName.setError("Please enter Shop Name");
             etShopName.requestFocus();
-            return;
-        }
-
-        if (TextUtils.isEmpty(etShopLocation.getText())) {
-            etShopLocation.setError("Please enter Shop Location");
-            etShopLocation.requestFocus();
             return;
         }
 

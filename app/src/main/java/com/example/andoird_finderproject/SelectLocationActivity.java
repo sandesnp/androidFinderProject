@@ -51,9 +51,10 @@ public class SelectLocationActivity extends FragmentActivity implements OnMapRea
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
+        LatLng sydney = new LatLng(27.675270, 85.363879);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMap.getUiSettings().setZoomControlsEnabled(true);
 
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(), ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
@@ -64,7 +65,7 @@ public class SelectLocationActivity extends FragmentActivity implements OnMapRea
             @Override
             public void onMapClick(final LatLng latLng) {
                 Toast.makeText(SelectLocationActivity.this, "Clicked on position -> " + latLng.toString(), Toast.LENGTH_SHORT).show();
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom((latLng), 14));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom((latLng), 13));
                 mMap.addMarker(new MarkerOptions().position(latLng).title(ShopName));
 
                 //Runs events after 1 seconds

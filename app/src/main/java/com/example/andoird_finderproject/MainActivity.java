@@ -10,8 +10,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toast;
-
 
 import com.example.andoird_finderproject.fragments.Fragment_Home;
 import com.example.andoird_finderproject.fragments.Fragment_Popular;
