@@ -2,8 +2,10 @@ package com.example.andoird_finderproject.fragments;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,6 +20,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.andoird_finderproject.MainActivity;
 import com.example.andoird_finderproject.R;
 import com.example.andoird_finderproject.ShopRegisterAcitivty;
 import com.example.andoird_finderproject.fragments.Inner_Fragment.fragmentUserCreate;
@@ -42,6 +45,8 @@ public class Fragment_Profile extends Fragment implements View.OnClickListener {
     private Button btnSignOut, btnRegisterShop;
     private EditText etEmail, etPassword;
     private int RC_SIGN_IN = 0;
+
+    SharedPreferences sharedPreferences = MainActivity.activity.getSharedPreferences("User", Context.MODE_PRIVATE);
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -78,6 +83,10 @@ public class Fragment_Profile extends Fragment implements View.OnClickListener {
                             public void onComplete(@NonNull Task<Void> task) {
                                 Toast.makeText(getContext(), "Successfully Signed out", Toast.LENGTH_SHORT).show();
                                 global.token = "Bearer ";
+                                sharedPreferences = MainActivity.activity.getSharedPreferences("User", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("token", "");
+                                editor.apply();
                                 updateUI(null);
                             }
                         });
@@ -102,11 +111,14 @@ public class Fragment_Profile extends Fragment implements View.OnClickListener {
 
         //if the account is not null means user is currently logged in.
         if (account != null) {
-            //redirecting to register google email if not registered
-            if (!new requestUser(null).fetchBy(account.getEmail())) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new fragmentUserCreate())
-                        .addToBackStack(null).commit();
-                return;
+
+            if (sharedPreferences.getString("token", "").equals("")) {
+                //redirecting to register google email if not registered
+                if (!new requestUser(null).fetchBy(account.getEmail())) {
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new fragmentUserCreate())
+                            .addToBackStack(null).commit();
+                    return;
+                }
             }
             signInButton.setVisibility(View.GONE);
             tvFullName.setVisibility(View.VISIBLE);
@@ -116,8 +128,7 @@ public class Fragment_Profile extends Fragment implements View.OnClickListener {
             tvFullName.setText(account.getDisplayName());
             tvEmail.setText(account.getEmail());
 
-        }
-        else {
+        } else {
             signInButton.setVisibility(View.VISIBLE);
             tvFullName.setVisibility(View.GONE);
             tvEmail.setVisibility(View.GONE);

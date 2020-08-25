@@ -1,6 +1,10 @@
 package com.example.andoird_finderproject.httpRequests;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import com.example.andoird_finderproject.InterfaceAPI.userAPI;
+import com.example.andoird_finderproject.MainActivity;
 import com.example.andoird_finderproject.global.global;
 import com.example.andoird_finderproject.models.user;
 import com.example.andoird_finderproject.parentClass.restfulRequest;
@@ -12,6 +16,8 @@ import retrofit2.Response;
 public class requestUser extends restfulRequest {
 
     private user user;
+    SharedPreferences sharedPreferences = MainActivity.activity.getSharedPreferences("User", Context.MODE_PRIVATE);
+    SharedPreferences.Editor editor = sharedPreferences.edit();
 
     //Just pass null tp constructor when accessing function that doesn't require it.
     public requestUser(user user) {
@@ -26,6 +32,9 @@ public class requestUser extends restfulRequest {
             Response<responseUser> userResponse = ownerCall.execute();
             if (userResponse.isSuccessful()) {
                 global.token += userResponse.body().getToken();
+                String abc = userResponse.body().getToken();
+                editor.putString("token", userResponse.body().getToken());
+                editor.commit();
                 return true;
             }
         } catch (Exception e) {
@@ -41,10 +50,13 @@ public class requestUser extends restfulRequest {
         try {
             Response<responseUser> userResponse = userCall.execute();
             if (userResponse.isSuccessful() && !userResponse.body().getToken().equals("")) {
-                global.token+=userResponse.body().getToken();
-                return true;
+                global.token += userResponse.body().getToken();
+                String abc = userResponse.body().getToken();
+                editor.putString("token", userResponse.body().getToken());
+                editor.commit();
+                return true; //sends true if email exists
             }
-            return false;
+            return false; //sends false if email doesn't exists
         } catch (Exception e) {
             e.printStackTrace();
         }
