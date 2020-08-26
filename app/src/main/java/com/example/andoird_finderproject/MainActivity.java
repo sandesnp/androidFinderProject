@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         setContentView(R.layout.activity_main);
         global.StrictMode();
         activity = this;
-        SharedPreferences sharedPreferences = MainActivity.activity.getSharedPreferences("User", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences =getSharedPreferences("User", Context.MODE_PRIVATE);
         if (!sharedPreferences.getString("token", "").equals("")) {
             //if token not empty
             global.token = "Bearer "+sharedPreferences.getString("token", "");

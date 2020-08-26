@@ -4,10 +4,17 @@ import java.util.ArrayList;
 
 public class shop {
 
-private String shopownerid, shopname,shoplogo, shoplocation;
+private String _id, shopname,shoplogo, shoplocation;
 private shopcoordinate shopcoordinate;
 private ArrayList<item> shopitems;
 
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
+    }
 
     public String getShopname() {
         return shopname;
@@ -33,11 +40,11 @@ private ArrayList<item> shopitems;
         this.shoplocation = shoplocation;
     }
 
-    public com.example.andoird_finderproject.models.shopcoordinate getShopcoordinate() {
+    public shopcoordinate getShopcoordinate() {
         return shopcoordinate;
     }
 
-    public void setShopcoordinate(com.example.andoird_finderproject.models.shopcoordinate shopcoordinate) {
+    public void setShopcoordinate(shopcoordinate shopcoordinate) {
         this.shopcoordinate = shopcoordinate;
     }
 
@@ -45,5 +52,8 @@ private ArrayList<item> shopitems;
         return shopitems;
     }
 
+    public void setShopitems(ArrayList<item> shopitems) {
+        this.shopitems = shopitems;
+    }
 }
 

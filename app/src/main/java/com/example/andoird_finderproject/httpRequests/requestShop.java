@@ -7,6 +7,7 @@ import com.example.andoird_finderproject.parentClass.restfulRequest;
 import com.example.andoird_finderproject.response.responseImage;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -25,18 +26,16 @@ public class requestShop extends restfulRequest {
     @Override
     public String postImage(String imagePath) {
 
-        String imageName="";
+        String imageName = "";
         File file = new File(imagePath);
         RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         MultipartBody.Part body = MultipartBody.Part.createFormData("image", file.getName(), requestBody);
 
-        shopAPI shopAPI= global.getInstance().create(shopAPI.class);
-        Call<responseImage> shopCall= shopAPI.uploadImage(body);
-
-
+        shopAPI shopAPI = global.getInstance().create(shopAPI.class);
+        Call<responseImage> shopCall = shopAPI.uploadImage(body);
         try {
-            Response<responseImage> imageResponse= shopCall.execute();
-            imageName= imageResponse.body().getFilename();
+            Response<responseImage> imageResponse = shopCall.execute();
+            imageName = imageResponse.body().getFilename();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -46,17 +45,32 @@ public class requestShop extends restfulRequest {
     @Override
     public boolean post() {
 
-        shopAPI shopAPI= global.getInstance().create(shopAPI.class);
-        Call<shop> shopCall= shopAPI.shopRegister(global.token, shop);
+        shopAPI shopAPI = global.getInstance().create(shopAPI.class);
+        Call<shop> shopCall = shopAPI.shopRegister(global.token, shop);
         global.StrictMode();
         try {
-            Response<shop> shopResponse= shopCall.execute();
-            if(shopResponse.isSuccessful()){
-             return true;
+            Response<shop> shopResponse = shopCall.execute();
+            if (shopResponse.isSuccessful()) {
+                return true;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public ArrayList<shop> fetchArray_Shop() {
+        shopAPI shopAPI = global.getInstance().create(shopAPI.class);
+        Call<ArrayList<shop>> shopCall = shopAPI.getShop(global.token);
+        global.StrictMode();
+        try {
+            Response<ArrayList<shop>> shopResponse = shopCall.execute();
+            if (shopResponse.isSuccessful()) {
+                return shopResponse.body();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

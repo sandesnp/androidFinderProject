@@ -17,9 +17,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.andoird_finderproject.ItemAddAcitivty;
 import com.example.andoird_finderproject.MainActivity;
 import com.example.andoird_finderproject.R;
 import com.example.andoird_finderproject.ShopRegisterAcitivty;
@@ -43,8 +45,8 @@ public class Fragment_Profile extends Fragment implements View.OnClickListener {
     private SignInButton signInButton;
     private TextView tvFullName, tvEmail;
     private Button btnSignOut, btnRegisterShop;
-    private EditText etEmail, etPassword;
     private int RC_SIGN_IN = 0;
+    private LinearLayout layout_insertItem;
 
     SharedPreferences sharedPreferences = MainActivity.activity.getSharedPreferences("User", Context.MODE_PRIVATE);
 
@@ -58,6 +60,7 @@ public class Fragment_Profile extends Fragment implements View.OnClickListener {
         tvEmail = view.findViewById(R.id.tvEmail);
         btnSignOut = view.findViewById(R.id.sign_out_button);
         btnRegisterShop = view.findViewById(R.id.btnRegisterShop);
+        view.findViewById(R.id.layout_insertItem).setOnClickListener(this);
         btnSignOut.setOnClickListener(this);
         signInButton.setOnClickListener(this);
         btnRegisterShop.setOnClickListener(this);
@@ -83,7 +86,6 @@ public class Fragment_Profile extends Fragment implements View.OnClickListener {
                             public void onComplete(@NonNull Task<Void> task) {
                                 Toast.makeText(getContext(), "Successfully Signed out", Toast.LENGTH_SHORT).show();
                                 global.token = "Bearer ";
-                                sharedPreferences = MainActivity.activity.getSharedPreferences("User", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putString("token", "");
                                 editor.apply();
@@ -93,6 +95,9 @@ public class Fragment_Profile extends Fragment implements View.OnClickListener {
                 break;
             case R.id.btnRegisterShop:
                 startActivity(new Intent(getActivity(), ShopRegisterAcitivty.class));
+                break;
+            case R.id.layout_insertItem:
+                startActivity(new Intent(getActivity(), ItemAddAcitivty.class));
                 break;
         }
     }

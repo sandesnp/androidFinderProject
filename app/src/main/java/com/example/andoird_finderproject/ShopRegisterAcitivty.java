@@ -54,7 +54,6 @@ public class ShopRegisterAcitivty extends AppCompatActivity implements View.OnCl
         tvCoordinate = findViewById(R.id.tvrgcoordinate);
         etShopButton = findViewById(R.id.btnrgshopregister);
         ivShopLogo = findViewById(R.id.imgrgshoplogo);
-
         tvCoordinate.setOnClickListener(this);
         etShopButton.setOnClickListener(this);
         ivShopLogo.setOnClickListener(this);
@@ -81,7 +80,7 @@ public class ShopRegisterAcitivty extends AppCompatActivity implements View.OnCl
             coordinateLongitude = Double.toString(data.getDoubleExtra("longitude", 0));
             coordinateLatitude = Double.toString(data.getDoubleExtra("latitude", 0));
 
-
+            //https://locationiq.com/docs#forward-geocoding
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl("https://us1.locationiq.com/")
                     .addConverterFactory(GsonConverterFactory.create())
@@ -92,18 +91,19 @@ public class ShopRegisterAcitivty extends AppCompatActivity implements View.OnCl
             try {
                 Response<location_address> shopResponse = shopCall.execute();
                 if (shopResponse.isSuccessful()) {
-                    String village = "";
+                    String isItVillage = "";
+                    //checking if the clicked location is either suburb (city), village or not habituated.
                     if (shopResponse.body().getAddress().getVillage() != null) {
-                        village = shopResponse.body().getAddress().getVillage() + ", "
+                        isItVillage = shopResponse.body().getAddress().getVillage() + ", "
                                 + shopResponse.body().getAddress().getCounty();
                     } else if (shopResponse.body().getAddress().getSuburb() != null) {
-                        village = shopResponse.body().getAddress().getSuburb() + ", "
+                        isItVillage = shopResponse.body().getAddress().getSuburb() + ", "
                                 + shopResponse.body().getAddress().getCounty();
                     } else {
-                        village = shopResponse.body().getAddress().getCounty() + ", "
+                        isItVillage = shopResponse.body().getAddress().getCounty() + ", "
                                 + shopResponse.body().getAddress().getCountry();
                     }
-                    tvShopLocation.setText(village);
+                    tvShopLocation.setText(isItVillage);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -113,7 +113,6 @@ public class ShopRegisterAcitivty extends AppCompatActivity implements View.OnCl
 
     private String getImagePath(Uri uri) {
         String[] projection = {MediaStore.Images.Media.DATA};
-
         CursorLoader loader = new CursorLoader(getApplicationContext(), uri, projection, null, null, null);
         Cursor cursor = loader.loadInBackground();
         int colIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
@@ -124,13 +123,11 @@ public class ShopRegisterAcitivty extends AppCompatActivity implements View.OnCl
     }
 
     private void Register() {
-
         shop shop = new shop();
         shop.setShopname(etShopName.getText().toString());
         shop.setShoplocation(tvShopLocation.getText().toString());
         shop.setShoplogo(imageName);
         shop.setShopcoordinate(new shopcoordinate(coordinateLatitude, coordinateLongitude, etShopName.getText().toString()));
-
         if (new requestShop(shop).post()) {
             Toast.makeText(this, "Successfully Registered Shop.", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, MainActivity.class));
@@ -163,8 +160,6 @@ public class ShopRegisterAcitivty extends AppCompatActivity implements View.OnCl
             etShopName.requestFocus();
             return;
         }
-
-
         if (checkImage) {
             imageName = new requestShop(new shop()).postImage(imagePath);
         }

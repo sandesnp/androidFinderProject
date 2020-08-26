@@ -1,16 +1,16 @@
 package com.example.andoird_finderproject.parentClass;
 
+import android.telephony.mbms.MbmsErrors;
+
+import java.util.ArrayList;
+
 public class restfulRequest {
 
     public boolean post() {
         return false;
     }
 
-    public boolean fetch() {
-        return false;
-    }
-
-    public boolean update() {
+    public boolean update(String ID) {
         return false;
     }
 

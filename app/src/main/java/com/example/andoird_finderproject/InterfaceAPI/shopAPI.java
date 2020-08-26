@@ -4,8 +4,11 @@ import com.example.andoird_finderproject.models.item;
 import com.example.andoird_finderproject.models.location_address;
 import com.example.andoird_finderproject.models.shop;
 import com.example.andoird_finderproject.response.responseImage;
+import com.example.andoird_finderproject.response.responseItem;
 
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;
@@ -28,10 +31,14 @@ public interface shopAPI {
     @POST("shop")
     Call<shop> shopRegister(@Header("Authorization") String token, @Body shop shop);
 
-    @PUT("shop/{id}")
-    Call<shop> itemRegister(@Path("id") String shopID, @Body item item);
 
     @GET("v1/reverse.php?key=6ee6609c633bc3&format=json")
     Call<location_address> getAddress(@Query("lat") String lat, @Query("lon") String lon);
+
+    @GET("shop")
+    Call<ArrayList<shop>> getShop(@Header("Authorization") String token);
+
+    @POST("shop/{id}/item")
+    Call<responseItem> itemRegister(@Path("id") String id, @Body item item, @Header("Authorization") String token);
 
 }
