@@ -60,7 +60,8 @@ public class Fragment_Profile extends Fragment implements View.OnClickListener {
         tvEmail = view.findViewById(R.id.tvEmail);
         btnSignOut = view.findViewById(R.id.sign_out_button);
         btnRegisterShop = view.findViewById(R.id.btnRegisterShop);
-        view.findViewById(R.id.layout_insertItem).setOnClickListener(this);
+        layout_insertItem=view.findViewById(R.id.layout_insertItem);
+        layout_insertItem.setOnClickListener(this);
         btnSignOut.setOnClickListener(this);
         signInButton.setOnClickListener(this);
         btnRegisterShop.setOnClickListener(this);
@@ -130,15 +131,16 @@ public class Fragment_Profile extends Fragment implements View.OnClickListener {
             tvEmail.setVisibility(View.VISIBLE);
             btnSignOut.setVisibility(View.VISIBLE);
             btnRegisterShop.setVisibility(View.VISIBLE);
+            layout_insertItem.setVisibility(View.VISIBLE);
             tvFullName.setText(account.getDisplayName());
             tvEmail.setText(account.getEmail());
-
         } else {
             signInButton.setVisibility(View.VISIBLE);
             tvFullName.setVisibility(View.GONE);
             tvEmail.setVisibility(View.GONE);
             btnSignOut.setVisibility(View.GONE);
             btnRegisterShop.setVisibility(View.GONE);
+            layout_insertItem.setVisibility(View.GONE);
         }
     }
 

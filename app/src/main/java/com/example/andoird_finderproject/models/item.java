@@ -2,7 +2,7 @@ package com.example.andoird_finderproject.models;
 
 public class item {
 
-    private String itemname, itemdescription, itemtype, itembrand, itempicture;
+    private String itemname, itemdescription, itemtype, itembrand, itempicture, shopid;
 
     public String getItemname() {
         return itemname;
@@ -42,5 +42,13 @@ public class item {
 
     public void setItempicture(String itempicture) {
         this.itempicture = itempicture;
+    }
+
+    public String getShopid() {
+        return shopid;
+    }
+
+    public void setShopid(String shopid) {
+        this.shopid = shopid;
     }
 }

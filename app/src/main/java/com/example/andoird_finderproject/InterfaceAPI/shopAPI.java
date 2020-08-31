@@ -9,6 +9,7 @@ import com.example.andoird_finderproject.response.responseItem;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;
@@ -40,5 +41,8 @@ public interface shopAPI {
 
     @POST("shop/{id}/item")
     Call<responseItem> itemRegister(@Path("id") String id, @Body item item, @Header("Authorization") String token);
+
+    @GET("shop/item")
+    Call<List<item>> getItem();
 
 }

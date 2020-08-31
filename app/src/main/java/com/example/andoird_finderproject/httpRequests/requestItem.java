@@ -12,6 +12,7 @@ import com.example.andoird_finderproject.response.responseImage;
 import com.example.andoird_finderproject.response.responseItem;
 
 import java.io.File;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -25,6 +26,21 @@ public class requestItem extends restfulRequest {
 
     public requestItem(item item) {
         this.item = item;
+    }
+
+
+    public List<item> fetchItems() {
+        shopAPI shopAPI = global.getInstance().create(shopAPI.class);
+        Call<List<item>> itemCall = shopAPI.getItem();
+        try {
+            Response<List<item>> itemResponse = itemCall.execute();
+            if (itemResponse.isSuccessful()) {
+                return itemResponse.body();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 

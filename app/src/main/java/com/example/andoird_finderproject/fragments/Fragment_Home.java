@@ -3,21 +3,68 @@ package com.example.andoird_finderproject.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.andoird_finderproject.InterfaceAPI.shopAPI;
 import com.example.andoird_finderproject.R;
+import com.example.andoird_finderproject.adapters.adapterRecycler;
+import com.example.andoird_finderproject.global.global;
+import com.example.andoird_finderproject.httpRequests.requestItem;
+import com.example.andoird_finderproject.models.item;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Fragment_Home extends Fragment {
+
+    List<item> listItem;
+    RecyclerView recyclerView_first_segment, recyclerView_second_segment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment__home, container, false);
+
+        recyclerView_first_segment = view.findViewById(R.id.recyclerView_firstSegment);
+        recyclerView_second_segment = view.findViewById(R.id.recyclerView_secondSegment);
+
+        listItem = new requestItem(null).fetchItems();
+        List<item> listItem_FirstSegment = new ArrayList<>();
+        List<item> listItem_SecondSegment = new ArrayList<>();
+        for (int i = 0; i < listItem.size(); i++) {
+            if (i < listItem.size() / 2) {
+                listItem_FirstSegment.add(listItem.get(i));
+            } else {
+                listItem_SecondSegment.add(listItem.get(i));
+            }
+        }
+
+        recyclerView_first_segment.setAdapter(new adapterRecycler(listItem_FirstSegment, getContext(), "home_fragment_first_segment"));
+        recyclerView_first_segment.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false);
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if (position % 3 == 0) {
+                    return 2;
+                }
+                return 1;
+
+            }
+        });
+        recyclerView_second_segment.setAdapter(new adapterRecycler(listItem_SecondSegment, getContext(), "home_fragment_second_segment"));
+        recyclerView_second_segment.setHorizontalScrollBarEnabled(true);
+        recyclerView_second_segment.setLayoutManager(gridLayoutManager);
         return view;
     }
 }
