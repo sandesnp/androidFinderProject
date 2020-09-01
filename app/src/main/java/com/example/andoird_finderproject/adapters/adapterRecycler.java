@@ -67,16 +67,14 @@ public class adapterRecycler extends RecyclerView.Adapter<adapterRecycler.Recycl
             public void onClick(View view) {
 
                 fragmentItem fragmentItem = new fragmentItem();
-                FragmentTransaction ft= fm.beginTransaction();
 
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("item", item);
-                fragmentItem.setArguments(bundle);
-                ft.replace(R.id.fragment_container, fragmentItem);
-                ft.addToBackStack(null);
-                ft.detach(fragmentItem);
-                ft.attach(fragmentItem);
-                ft.commit();
+                fm.setFragmentResult("withObject_Item", bundle);
+                fm.beginTransaction().replace(R.id.fragment_container, fragmentItem).
+                        setCustomAnimations(R.anim.enter_from_up, R.anim.exit_from_up).
+                        addToBackStack(null).detach(fragmentItem).attach(fragmentItem).
+                        commit();
             }
         });
 

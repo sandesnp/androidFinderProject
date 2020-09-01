@@ -40,26 +40,21 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Fragment fragment;
         switch (item.getItemId()) {
             case R.id.navigation_home:
-                fragment = new Fragment_Home();
-                loadFragment(fragment, 1);
+                loadFragment(new Fragment_Home(), 1);
                 break;
             case R.id.navigation_popular:
-                fragment = new Fragment_Popular();
-                loadFragment(fragment, 2);
+                loadFragment(new Fragment_Popular(), 2);
                 break;
             case R.id.navigation_profile:
-                fragment = new Fragment_Profile();
-                loadFragment(fragment, 3);
+                loadFragment(new Fragment_Profile(), 3);
                 break;
         }
         return true;
     }
 
     private int position = 0;
-
 
 
     private void loadFragment(Fragment fragment, int position) {
@@ -69,16 +64,24 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.fragment_container, fragment);
             if (this.position < position) {
-                transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_from_right,R.anim.enter_from_right, R.anim.exit_from_right);
+                transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_from_right, R.anim.enter_from_right, R.anim.exit_from_right);
             } else {
-                transaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_from_left,R.anim.enter_from_right, R.anim.exit_from_right);
+                transaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_from_left, R.anim.enter_from_right, R.anim.exit_from_right);
             }
             this.position = position;
-            transaction.addToBackStack(null);
             transaction.detach(fragment);
             transaction.attach(fragment);
             transaction.commit();
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (position != 1) {
+            loadFragment(new Fragment_Home(), 1);
+            return;
+        }
+        super.onBackPressed();
     }
 }

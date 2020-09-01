@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentResultListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.andoird_finderproject.MainActivity;
 import com.example.andoird_finderproject.R;
@@ -20,12 +21,16 @@ public class fragmentItem extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getParentFragmentManager().setFragmentResultListener("key", this, new FragmentResultListener() {
+        getParentFragmentManager().setFragmentResultListener("withObject_Item", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String key, @NonNull Bundle bundle) {
                 // We use a String here, but any type that can be put in a Bundle is supported
                 item result = (item) bundle.getSerializable("item");
                 // Do something with the result...
+                if (result != null) {
+                    Toast.makeText(getContext(), result.getItemname(), Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
     }
