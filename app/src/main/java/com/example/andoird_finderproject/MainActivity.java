@@ -27,15 +27,14 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         setContentView(R.layout.activity_main);
         global.StrictMode();
         activity = this;
-        SharedPreferences sharedPreferences =getSharedPreferences("User", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("User", Context.MODE_PRIVATE);
         if (!sharedPreferences.getString("token", "").equals("")) {
             //if token not empty
-            global.token = "Bearer "+sharedPreferences.getString("token", "");
+            global.token = "Bearer " + sharedPreferences.getString("token", "");
         }
 
         BottomNavigationView navigationView = findViewById(R.id.navigation);
         navigationView.setOnNavigationItemSelectedListener(this);
-
         loadFragment(new Fragment_Home(), 1);
     }
 
@@ -61,16 +60,18 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     private int position = 0;
 
+
+
     private void loadFragment(Fragment fragment, int position) {
 
-        while (this.position != position) {
+        if (this.position != position) {
             // load fragment
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.fragment_container, fragment);
             if (this.position < position) {
-                transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_from_right);
+                transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_from_right,R.anim.enter_from_right, R.anim.exit_from_right);
             } else {
-                transaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_from_left);
+                transaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_from_left,R.anim.enter_from_right, R.anim.exit_from_right);
             }
             this.position = position;
             transaction.addToBackStack(null);

@@ -1,6 +1,8 @@
 package com.example.andoird_finderproject.adapters;
 
+import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,9 +10,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.andoird_finderproject.MainActivity;
 import com.example.andoird_finderproject.R;
+import com.example.andoird_finderproject.fragments.Fragment_Home;
+import com.example.andoird_finderproject.fragments.Inner_Fragment.fragmentItem;
 import com.example.andoird_finderproject.global.global;
 import com.example.andoird_finderproject.models.item;
 import com.squareup.picasso.Picasso;
@@ -22,11 +30,13 @@ public class adapterRecycler extends RecyclerView.Adapter<adapterRecycler.Recycl
     List<item> listItem;
     Context mContext;
     String FragmentType;
+    FragmentManager fm;
 
-    public adapterRecycler(List<item> listItem, Context mContext, String FragmentType) {
+    public adapterRecycler(List<item> listItem, Context mContext, String FragmentType, FragmentManager fm) {
         this.listItem = listItem;
         this.mContext = mContext;
         this.FragmentType = FragmentType;
+        this.fm = fm;
     }
 
     @NonNull
@@ -47,10 +57,28 @@ public class adapterRecycler extends RecyclerView.Adapter<adapterRecycler.Recycl
     @Override
     public void onBindViewHolder(@NonNull RecycleViewHolder holder, int position) {
 
-        item item = listItem.get(position);
+        final item item = listItem.get(position);
         holder.tv_segment_itemName.setText(item.getItemname());
         String imagePath = global.imagePath + item.getItempicture();
         Picasso.get().load(imagePath).into(holder.iv_segment_itemPicture);
+
+        holder.iv_segment_itemPicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                fragmentItem fragmentItem = new fragmentItem();
+                FragmentTransaction ft= fm.beginTransaction();
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("item", item);
+                fragmentItem.setArguments(bundle);
+                ft.replace(R.id.fragment_container, fragmentItem);
+                ft.addToBackStack(null);
+                ft.detach(fragmentItem);
+                ft.attach(fragmentItem);
+                ft.commit();
+            }
+        });
 
 
     }

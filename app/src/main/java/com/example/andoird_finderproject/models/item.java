@@ -1,6 +1,8 @@
 package com.example.andoird_finderproject.models;
 
-public class item {
+import java.io.Serializable;
+
+public class item implements Serializable {
 
     private String itemname, itemdescription, itemtype, itembrand, itempicture, shopid;
 

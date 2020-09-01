@@ -47,7 +47,6 @@ public class Fragment_Profile extends Fragment implements View.OnClickListener {
     private Button btnSignOut, btnRegisterShop;
     private int RC_SIGN_IN = 0;
     private LinearLayout layout_insertItem;
-
     SharedPreferences sharedPreferences = MainActivity.activity.getSharedPreferences("User", Context.MODE_PRIVATE);
 
     @Override
@@ -60,7 +59,7 @@ public class Fragment_Profile extends Fragment implements View.OnClickListener {
         tvEmail = view.findViewById(R.id.tvEmail);
         btnSignOut = view.findViewById(R.id.sign_out_button);
         btnRegisterShop = view.findViewById(R.id.btnRegisterShop);
-        layout_insertItem=view.findViewById(R.id.layout_insertItem);
+        layout_insertItem = view.findViewById(R.id.layout_insertItem);
         layout_insertItem.setOnClickListener(this);
         btnSignOut.setOnClickListener(this);
         signInButton.setOnClickListener(this);

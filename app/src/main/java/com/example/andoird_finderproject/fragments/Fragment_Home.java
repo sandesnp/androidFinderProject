@@ -2,10 +2,13 @@ package com.example.andoird_finderproject.fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.OnScrollListener;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,11 +24,14 @@ import com.example.andoird_finderproject.models.item;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 
 public class Fragment_Home extends Fragment {
 
     List<item> listItem;
     RecyclerView recyclerView_first_segment, recyclerView_second_segment;
+    CircleImageView cv_goLeft, cv_goRight;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,6 +41,10 @@ public class Fragment_Home extends Fragment {
 
         recyclerView_first_segment = view.findViewById(R.id.recyclerView_firstSegment);
         recyclerView_second_segment = view.findViewById(R.id.recyclerView_secondSegment);
+        cv_goLeft = view.findViewById(R.id.cv_goLeft);
+        cv_goRight = view.findViewById(R.id.cv_goRight);
+        cv_goLeft.setPadding(-80, -50, -80, -50);
+        cv_goRight.setPadding(-80, -50, -80, -50);
 
         listItem = new requestItem(null).fetchItems();
         List<item> listItem_FirstSegment = new ArrayList<>();
@@ -47,10 +57,29 @@ public class Fragment_Home extends Fragment {
             }
         }
 
-        recyclerView_first_segment.setAdapter(new adapterRecycler(listItem_FirstSegment, getContext(), "home_fragment_first_segment"));
-        recyclerView_first_segment.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
+        //first segment
+        final adapterRecycler adapter_Recycler = new adapterRecycler(listItem_FirstSegment, getContext(), "home_fragment_first_segment", getParentFragmentManager());
+        recyclerView_first_segment.setAdapter(adapter_Recycler);
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView_first_segment.setLayoutManager(linearLayoutManager);
+        //Carousal Left and Right clickable
+        cv_goLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (linearLayoutManager.findFirstCompletelyVisibleItemPosition() != 0) {
+                    recyclerView_first_segment.smoothScrollToPosition(linearLayoutManager.findFirstCompletelyVisibleItemPosition() - 1);
+                }
+            }
+        });
+        cv_goRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                recyclerView_first_segment.smoothScrollToPosition(linearLayoutManager.findLastCompletelyVisibleItemPosition() + 1);
+            }
+        });
 
+        //second segment
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false);
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
@@ -59,10 +88,9 @@ public class Fragment_Home extends Fragment {
                     return 2;
                 }
                 return 1;
-
             }
         });
-        recyclerView_second_segment.setAdapter(new adapterRecycler(listItem_SecondSegment, getContext(), "home_fragment_second_segment"));
+        recyclerView_second_segment.setAdapter(new adapterRecycler(listItem_SecondSegment, getContext(), "home_fragment_second_segment",getParentFragmentManager()));
         recyclerView_second_segment.setHorizontalScrollBarEnabled(true);
         recyclerView_second_segment.setLayoutManager(gridLayoutManager);
         return view;
