@@ -10,11 +10,19 @@ import androidx.fragment.app.FragmentResultListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.shape.CornerTreatment;
+import com.google.android.material.shape.CutCornerTreatment;
+import com.google.android.material.shape.EdgeTreatment;
+import com.google.android.material.shape.RelativeCornerSize;
+import com.google.android.material.shape.ShapeAppearanceModel;
 import com.example.andoird_finderproject.MainActivity;
 import com.example.andoird_finderproject.R;
 import com.example.andoird_finderproject.models.item;
+import com.google.android.material.shape.ShapePath;
 
 public class fragmentItem extends Fragment {
 
@@ -30,16 +38,24 @@ public class fragmentItem extends Fragment {
                 if (result != null) {
                     Toast.makeText(getContext(), result.getItemname(), Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
     }
+
+    MaterialButton btn_check;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_item, container, false);
+        btn_check=view.findViewById(R.id.check_button);
+        ShapeAppearanceModel shapeAppearanceModel = new ShapeAppearanceModel()
+                .toBuilder()
+                .setTopRightCorner(new CutCornerTreatment()).setAllCornerSizes(50)
+                .build();
+        btn_check.setShapeAppearanceModel(shapeAppearanceModel);
+
         return view;
     }
 }
