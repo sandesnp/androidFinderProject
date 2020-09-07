@@ -3,7 +3,7 @@
 
     android:padding="10dp"
     android:shape="rectangle">
-    <solid android:color="#ABABAB" />
+    <solid android:color="#ABABAB" />a
 
 
     <gradient
