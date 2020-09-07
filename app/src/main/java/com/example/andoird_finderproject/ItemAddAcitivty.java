@@ -142,6 +142,10 @@ public class ItemAddAcitivty extends AppCompatActivity implements View.OnClickLi
             tv_selectImage.requestFocus();
             return;
         }
+        if(ShopID.equals("")){
+            Toast.makeText(itemActivity, "Please select a Shop", Toast.LENGTH_SHORT).show();
+            return;
+        }
         itemRegister();
     }
 
@@ -153,10 +157,22 @@ public class ItemAddAcitivty extends AppCompatActivity implements View.OnClickLi
         item.setItemtype(itemType.getText().toString());
         item.setItembrand(itemBrand.getText().toString());
         item.setItempicture(imageName);
-        new requestItem(item).update(ShopID);
+        if(new requestItem(item).update(ShopID))
+        {
+            //If the update is success
+            itemName.setText(null);
+            itemDescription.setText(null);
+            itemType.setText(null);
+            itemBrand.setText(null);
+            ItemImage_01.setImageResource(R.drawable.red_background_clipart);
+            ItemImage_02.setImageResource(R.drawable.red_background_clipart);
+            ItemImage_03.setImageResource(R.drawable.red_background_clipart);
+            ShopID="";
+        }
+
     }
 
-    String ShopID;
+    String ShopID="";
     public void dialogSelectShop() {
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
