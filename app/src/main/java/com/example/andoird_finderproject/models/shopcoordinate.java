@@ -14,15 +14,12 @@ public class shopcoordinate {
         return latitude;
     }
 
-
     public String getLongitude() {
         return longitude;
     }
 
-
     public String getMarker() {
         return marker;
     }
-
 
 }

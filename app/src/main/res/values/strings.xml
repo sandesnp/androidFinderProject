@@ -8,6 +8,8 @@
     <string name="enter_email">Enter Email</string>
     <string name="enter_password">Enter Password</string>
     <string name="owner_field">User Input Field</string>
+    <string name="sign_out">Sign Out</string>
+
 
     <!--    Shop Register-->
     <string name="enter_shop_name">Enter Shop Name</string>
@@ -16,6 +18,7 @@
     <string name="enter_shop_google_location"><u>Designate Shop Location on Map</u></string>
     <string name="reg_shop_button">Submit</string>
     <string name="title_activity_select_location">Map</string>
+    <string name="reg_shop">Register Shop</string>
 
     <!--    Item Add-->
     <string name="add_item">Add an Item</string>
@@ -42,9 +45,10 @@
     <string name="item_type"><b>Type of Product</b></string>
     <string name="item_description"><b>Product Description</b></string>
     <string name="item_distributor"><b>Product Distributor</b></string>
-
+    <string name="item_name"><b>Item Name</b></string>
     <!--    Default Text-->
     <string name="default_text">Default </string>
     <string name="default_dismiss">Dismiss </string>
+
 
 </resources>

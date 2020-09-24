@@ -203,7 +203,7 @@ public class ItemAddAcitivty extends AppCompatActivity implements View.OnClickLi
 
                 @Override
                 public void onNothingSelected(AdapterView<?> adapterView) {
-
+                    Toast.makeText(ItemAddAcitivty.this, "Shop is required.", Toast.LENGTH_SHORT).show();
                 }
             });
         }

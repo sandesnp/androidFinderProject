@@ -44,7 +44,7 @@ public class Fragment_Profile extends Fragment implements View.OnClickListener {
     GoogleSignInClient mGoogleSignInClient;
     private SignInButton signInButton;
     private TextView tvFullName, tvEmail;
-    private Button btnSignOut, btnRegisterShop;
+    private LinearLayout btnSignOut, btnRegisterShop;
     private int RC_SIGN_IN = 0;
     private LinearLayout layout_insertItem;
     SharedPreferences sharedPreferences = MainActivity.activity.getSharedPreferences("User", Context.MODE_PRIVATE);

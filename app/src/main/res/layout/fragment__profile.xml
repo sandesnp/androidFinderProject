@@ -3,29 +3,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E1DFDF"
     tools:context=".fragments.Fragment_Profile">
 
 
     <LinearLayout
         android:id="@+id/layout_insertItem"
-        android:layout_width="wrap_content"
+        android:layout_width="270dp"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/btnRegisterShop"
         android:layout_centerHorizontal="true"
-        android:padding="5dp"
-        android:background="@drawable/border_item"
-        android:orientation="horizontal">
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/circle_border"
+        android:orientation="horizontal"
+        android:padding="10dp">
 
         <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:src="@drawable/ic_shop_select" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:textColor="@android:color/black"
+            android:layout_gravity="center"
             android:text="@string/add_item"
+            android:textColor="@android:color/black"
             android:textSize="30sp" />
     </LinearLayout>
 
@@ -35,47 +38,92 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
 
-    <Button
+
+    <LinearLayout
         android:id="@+id/btnRegisterShop"
-        android:layout_width="wrap_content"
+        android:layout_width="270dp"
         android:layout_height="wrap_content"
         android:layout_above="@id/sign_out_button"
         android:layout_centerHorizontal="true"
-        android:padding="0sp"
-        android:text="Register a Shop"
-        android:textSize="15sp"
-        android:visibility="gone" />
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/circle_border"
+        android:orientation="horizontal"
+        android:padding="15dp"
+        android:visibility="gone">
 
-    <Button
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_shop_select" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/reg_shop"
+            android:textColor="@android:color/black"
+            android:textSize="30sp" />
+    </LinearLayout>
+
+
+    <LinearLayout
         android:id="@+id/sign_out_button"
-        android:layout_width="wrap_content"
+        android:layout_width="270dp"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:padding="0sp"
-        android:text="Sign Out"
-        android:textSize="15sp"
-        android:visibility="gone" />
+        android:background="@drawable/circle_border"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:visibility="gone">
 
-    <TextView
-        android:id="@+id/tvEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/sign_out_button"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="20dp"
-        android:text="default01"
-        android:textSize="25sp"
-        android:visibility="gone" />
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_shop_select" />
 
-    <TextView
-        android:id="@+id/tvFullName"
-        android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="20dp"
+            android:text="@string/sign_out"
+            android:textColor="@android:color/black"
+            android:textSize="30sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvEmail"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="20dp"
-        android:text="default01"
-        android:textSize="25sp"
-        android:visibility="gone" />
+        android:layout_below="@id/sign_out_button"
+        android:layout_margin="15dp"
+        android:background="@drawable/circle_border_profile"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:fontFamily="sans-serif"
+            android:text="@string/default_text"
+            android:textColor="#000000"
+            android:textSize="25sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tvFullName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:fontFamily="sans-serif"
+            android:text="@string/default_text"
+            android:textColor="#000000"
+            android:textSize="25sp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
 
 </RelativeLayout>

@@ -5,8 +5,16 @@ import java.util.ArrayList;
 
 public class item implements Serializable {
 
-    private String itemname, itemdescription, itemtype, itembrand, itempicture, shopid, shoplogo,shoplocation;
+    private String  _id,itemname, itemdescription, itemtype, itembrand, itempicture, shopid, shoplogo,shoplocation;
     private shopcoordinate shopcoordinate;
+
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
+    }
 
     public String getItemname() {
         return itemname;

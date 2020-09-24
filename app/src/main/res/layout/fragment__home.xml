@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="#C5C0C0"
     android:layout_height="match_parent"
     tools:context=".fragments.Fragment_Home">
 
@@ -22,6 +23,11 @@
             android:background="@drawable/border_item"
             android:hint="@string/navigation_search"
             android:padding="10dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycleView_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -53,7 +59,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView_secondSegment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="500dp"
             android:layout_margin="10dp" />
     </LinearLayout>
 
