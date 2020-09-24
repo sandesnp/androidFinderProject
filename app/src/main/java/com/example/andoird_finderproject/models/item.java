@@ -1,10 +1,12 @@
 package com.example.andoird_finderproject.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class item implements Serializable {
 
-    private String itemname, itemdescription, itemtype, itembrand, itempicture, shopid;
+    private String itemname, itemdescription, itemtype, itembrand, itempicture, shopid, shoplogo,shoplocation;
+    private shopcoordinate shopcoordinate;
 
     public String getItemname() {
         return itemname;
@@ -52,5 +54,29 @@ public class item implements Serializable {
 
     public void setShopid(String shopid) {
         this.shopid = shopid;
+    }
+
+    public shopcoordinate getShopcoordinate() {
+        return shopcoordinate;
+    }
+
+    public void setShopcoordinate(shopcoordinate shopcoordinate) {
+        this.shopcoordinate = shopcoordinate;
+    }
+
+    public String getShoplogo() {
+        return shoplogo;
+    }
+
+    public void setShoplogo(String shoplogo) {
+        this.shoplogo = shoplogo;
+    }
+
+    public String getShoplocation() {
+        return shoplocation;
+    }
+
+    public void setShoplocation(String shoplocation) {
+        this.shoplocation = shoplocation;
     }
 }

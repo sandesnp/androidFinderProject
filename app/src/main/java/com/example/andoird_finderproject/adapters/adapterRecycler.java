@@ -50,6 +50,9 @@ public class adapterRecycler extends RecyclerView.Adapter<adapterRecycler.Recycl
             case "home_fragment_second_segment":
                 view = LayoutInflater.from(mContext).inflate(R.layout.home_second_segment, parent, false);
                 break;
+            case "popular_fragment":
+                view = LayoutInflater.from(mContext).inflate(R.layout.popular_item, parent, false);
+                break;
         }
         return new RecycleViewHolder(view);
     }

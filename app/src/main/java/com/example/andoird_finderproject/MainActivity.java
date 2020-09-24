@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     private int position = 0;
 
-
     private void loadFragment(Fragment fragment, int position) {
 
         if (this.position != position) {
