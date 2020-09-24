@@ -2,14 +2,21 @@ package com.example.andoird_finderproject;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.andoird_finderproject.fragments.Fragment_Home;
 import com.example.andoird_finderproject.fragments.Fragment_Popular;
@@ -35,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         BottomNavigationView navigationView = findViewById(R.id.navigation);
         navigationView.setOnNavigationItemSelectedListener(this);
+        grantPermission();
         loadFragment(new Fragment_Home(), 1);
     }
 
@@ -82,5 +90,45 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             return;
         }
         super.onBackPressed();
+    }
+
+    private int STORAGE_PERMISSION_CODE = 1;
+    String[] PERMISSIONS = new String[2];
+    int Fine_Location, External_Storage;
+
+    public void grantPermission() {
+        Fine_Location = ContextCompat.checkSelfPermission(MainActivity.activity,
+                Manifest.permission.ACCESS_FINE_LOCATION);
+        External_Storage = ContextCompat.checkSelfPermission(MainActivity.activity,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (Fine_Location == PackageManager.PERMISSION_GRANTED && External_Storage == PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+
+        if (Fine_Location != PackageManager.PERMISSION_GRANTED) {
+
+            PERMISSIONS[0] = Manifest.permission.ACCESS_FINE_LOCATION;
+        }
+        if (External_Storage != PackageManager.PERMISSION_GRANTED) {
+
+            PERMISSIONS[1] = Manifest.permission.WRITE_EXTERNAL_STORAGE;
+        }
+        requestStoragePermission();
+    }
+
+    private void requestStoragePermission() {
+            ActivityCompat.requestPermissions(this,
+                    PERMISSIONS, STORAGE_PERMISSION_CODE);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == STORAGE_PERMISSION_CODE && grantResults.length > 0) {
+            if (grantResults[0] == PackageManager.PERMISSION_DENIED || grantResults[1] == PackageManager.PERMISSION_DENIED) {
+                finishAffinity();
+            }
+        }
     }
 }
